@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
-[RequireComponent(typeof(AudioSource))]
 
+[RequireComponent(typeof(AudioSource))]
 public class AlarmSystem : MonoBehaviour
 {
     [SerializeField] private Flooring _flooring;
@@ -17,14 +17,14 @@ public class AlarmSystem : MonoBehaviour
 
     private void OnEnable()
     {
-        _flooring.WasSteppedOn += TurnSiren;
-        _flooring.LeftMe += TurnOffSiren;
+        _flooring.SomeoneEntered += TurnSiren;
+        _flooring.SomeoneCameOut += TurnOffSiren;
     }
 
     private void OnDisable()
     {
-        _flooring.WasSteppedOn -= TurnSiren;
-        _flooring.LeftMe -= TurnOffSiren;
+        _flooring.SomeoneEntered -= TurnSiren;
+        _flooring.SomeoneCameOut -= TurnOffSiren;
     }
 
     private void TurnSiren(Collider collider)
@@ -47,9 +47,6 @@ public class AlarmSystem : MonoBehaviour
         {
             StopCoroutine(_coroutine);
             _coroutine = StartCoroutine(ChangingVolume(0.0f));
-
-            if (_audioSource.volume == 0.0f)
-                _audioSource.Stop();
         }
     }
 

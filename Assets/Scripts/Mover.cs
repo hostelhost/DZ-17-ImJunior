@@ -1,11 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-[RequireComponent(typeof(Rigidbody))]
 
+[RequireComponent(typeof(Rigidbody))]
 public class Mover : MonoBehaviour
 {
     [SerializeField] private float _speed = 3.0f;
+    const string Horizontal = "Horizontal";
+    const string Vertical = "Vertical";
 
     private Rigidbody _rigidbody;
     private float _hotizontal;
@@ -19,8 +19,8 @@ public class Mover : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _hotizontal = Input.GetAxis("Horizontal");
-        _vertical = Input.GetAxis("Vertical");
+        _hotizontal = Input.GetAxis(Horizontal);
+        _vertical = Input.GetAxis(Vertical);
         _movement = new Vector3(_hotizontal, 0.0f, _vertical);
         _rigidbody.AddForce(_movement * _speed);
     }

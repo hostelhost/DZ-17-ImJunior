@@ -3,16 +3,16 @@ using UnityEngine;
 
 public class Flooring : MonoBehaviour
 {
-    public event Action<Collider> WasSteppedOn;
-    public event Action<Collider> LeftMe;
+    public event Action<Collider> SomeoneEntered;
+    public event Action<Collider> SomeoneCameOut;
 
     private void OnTriggerEnter(Collider other)
     {
-        WasSteppedOn?.Invoke(other);
+        SomeoneEntered?.Invoke(other);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        LeftMe?.Invoke(other);
+        SomeoneCameOut?.Invoke(other);
     }
 }
